@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="Weekly Discipline Schedule - Build Better Habits">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIldlZWtseSBEaXNjaXBsaW5lIFNjaGVkdWxlIiwKICAic2hvcnRfbmFtZSI6ICJTY2hlZHVsZSIsCiAgImRlc2NyaXB0aW9uIjogIkJ1aWxkIGJldHRlciBoYWJpdHMgd2l0aCB5b3VyIHBlcnNvbmFsIHdlZWtseSBzY2hlZHVsZSIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZmZmZiIsCiAgInRoZW1lX2NvbG9yIjogIiM2NjdlZWEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSTFNVEVPSUDOBGVSYW5kYSoGlTSkxJaThDSUdacGJHdzlJaU0yTmpkbFpXRWlQZ28JUER4amFYSmpiR1VnWTNnOUlqSTFOaUlnWTNrOUlqSTFOaUlnY2owaU1qVXdJaUJtYVd4c1BTSJRKQ2MwTlRaR1JrWWlMejRLSUR4d1lYUm9JR1E5SWswZ01UQXdJREUxTUNCc0lESTFNQ0F3SUd3Z01DQXlOVEFnV2lJZ1ptbHNiRDBpSTJabVptWm1aaUl2UGdvOEwzTjJaejQ9IiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSTFNVEVPSUNONGRSYW5kYSoGlTSkxJaThDSUdacGJHdzlJaU0yTmpkbFpXRWlQZ29JUER4amFYSmpiR1VnWTNnOUlqSTFOaUlnWTNrOUlqSTFOaUlnY2owaU1qVXdJaUJtYVd4c1BTSJRKQ2MwTlRaR1JrWWlMejRLSUR4d1lYUm9JR1E5SWswZ01UQXdJREUxTUNCc0lESTFNQ0F3SUd3Z01DQXlOVEFnV2lJZ1ptbHNiRDBpSTJabVptWm1aaUl2UGdvOEwzTjJaejQ9IiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjNjY3ZWVhIj4KICA8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI1MCIgZmlsbD0iIzQ1NkRGRiIvPgogIDxwYXRoIGQ9Ik0gMTAwIDE1MCBsIDI1MCAwIGwgMCAyNTAgWiIgZmlsbD0iI2ZmZmZmZiIvPgo8L3N2Zz4=">
+    <title>Weekly Discipline Schedule</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateX(-50%) translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .install-prompt.show {
+            display: flex;
+        }
+
+        .install-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .install-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .close-install {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .schedule-container {
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .time-cell {
+            font-weight: 600;
+            color: #667eea;
+            white-space: nowrap;
+        }
+
+        .activity {
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .activity:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .activity.completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        .sleep { background: #e3f2fd; color: #1976d2; }
+        .study-ai { background: #f3e5f5; color: #7b1fa2; }
+        .linkedin { background: #e8f5e9; color: #388e3c; }
+        .github { background: #fff3e0; color: #f57c00; }
+        .book { background: #fce4ec; color: #c2185b; }
+        .speaking { background: #e0f2f1; color: #00796b; }
+        .upwork { background: #fff9c4; color: #f57f17; }
+        .gym { background: #ffebee; color: #d32f2f; }
+        .free { background: #f5f5f5; color: #616161; }
+        .meal { background: #ffe0b2; color: #e65100; }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px 30px;
+            background: #f8f9fa;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+        }
+
+        .progress-section {
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .motivational-quote {
+            text-align: center;
+            padding: 30px;
+            font-size: 1.2em;
+            font-style: italic;
+            color: #667eea;
+            background: white;
+        }
+
+        .offline-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        .offline-indicator.offline {
+            background: #ff9800;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .schedule-container {
+                padding: 15px;
+            }
+            
+            th, td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+
+            .install-prompt {
+                width: 90%;
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-indicator" id="offlineIndicator">
+        📱 App works offline!
+    </div>
+
+    <div class="install-prompt" id="installPrompt">
+        <span>📱 Install this app for offline access!</span>
+        <button class="install-btn" id="installBtn">Install</button>
+        <button class="close-install" id="closeInstall">×</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🎯 My Weekly Discipline Schedule</h1>
+            <p>Building Better Habits, One Day at a Time</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>9</h3>
+                <p>Daily Activities</p>
+            </div>
+            <div class="stat-card">
+                <h3>8hrs</h3>
+                <p>Quality Sleep</p>
+            </div>
+            <div class="stat-card">
+                <h3>7hrs</h3>
+                <p>Productive Hours</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="completion">0%</h3>
+                <p>Week Completion</p>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <h3>Weekly Progress</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill">0%</div>
+            </div>
+        </div>
+
+        <div class="schedule-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                        <th>Sunday</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleBody">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color sleep"></div>
+                <span>Sleep (8hrs)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color study-ai"></div>
+                <span>Study AI (2hrs)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color linkedin"></div>
+                <span>LinkedIn (1hr)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color github"></div>
+                <span>GitHub (1hr)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color book"></div>
+                <span>Read Book (1hr)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color speaking"></div>
+                <span>Speaking (1hr)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color upwork"></div>
+                <span>Upwork Course (1hr)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color gym"></div>
+                <span>Gym (1hr)</span>
+            </div>
+        </div>
+
+        <div class="motivational-quote">
+            "Discipline is choosing between what you want now and what you want most." 💪
+        </div>
+    </div>
+
+    <script>
+        // Service Worker Registration for offline support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                    const CACHE_NAME = 'discipline-schedule-v1';
+                    
+                    self.addEventListener('install', (event) => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME).then((cache) => {
+                                return cache.addAll(['/']);
+                            })
+                        );
+                    });
+
+                    self.addEventListener('fetch', (event) => {
+                        event.respondWith(
+                            caches.match(event.request).then((response) => {
+                                return response || fetch(event.request);
+                            })
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl)
+                    .then(() => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+
+        // PWA Install prompt
+        let deferredPrompt;
+        const installPrompt = document.getElementById('installPrompt');
+        const installBtn = document.getElementById('installBtn');
+        const closeInstall = document.getElementById('closeInstall');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installPrompt.classList.add('show');
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response: ${outcome}`);
+                deferredPrompt = null;
+                installPrompt.classList.remove('show');
+            }
+        });
+
+        closeInstall.addEventListener('click', () => {
+            installPrompt.classList.remove('show');
+        });
+
+        // Offline indicator
+        const offlineIndicator = document.getElementById('offlineIndicator');
+        
+        window.addEventListener('online', () => {
+            offlineIndicator.classList.remove('offline');
+        });
+
+        window.addEventListener('offline', () => {
+            offlineIndicator.classList.add('offline');
+            offlineIndicator.textContent = '📵 You are offline';
+        });
+
+        // Schedule logic
+        const schedule = {
+            '11:00 PM - 7:00 AM': { activity: 'Sleep 😴', class: 'sleep', span: 1 },
+            '7:00 AM - 8:00 AM': { activity: 'Morning Routine 🌅', class: 'free', span: 1 },
+            '8:00 AM - 9:00 AM': { activity: 'Breakfast 🍳', class: 'meal', span: 1 },
+            '9:00 AM - 11:00 AM': { activity: 'Study AI 🤖', class: 'study-ai', span: 1 },
+            '11:00 AM - 12:00 PM': { activity: 'LinkedIn 💼', class: 'linkedin', span: 1 },
+            '12:00 PM - 1:00 PM': { activity: 'Lunch Break 🍽️', class: 'meal', span: 1 },
+            '1:00 PM - 2:00 PM': { activity: 'GitHub 💻', class: 'github', span: 1 },
+            '2:00 PM - 3:00 PM': { activity: 'Read Book 📚', class: 'book', span: 1 },
+            '3:00 PM - 4:00 PM': { activity: 'Speaking Exercise 🗣️', class: 'speaking', span: 1 },
+            '4:00 PM - 5:00 PM': { activity: 'Upwork Course 💡', class: 'upwork', span: 1 },
+            '5:00 PM - 6:00 PM': { activity: 'Break / Snack ☕', class: 'free', span: 1 },
+            '6:00 PM - 7:00 PM': { activity: 'Gym 💪', class: 'gym', span: 1 },
+            '7:00 PM - 8:00 PM': { activity: 'Dinner 🍲', class: 'meal', span: 1 },
+            '8:00 PM - 11:00 PM': { activity: 'Free Time 🎮', class: 'free', span: 1 }
+        };
+
+        const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        const scheduleBody = document.getElementById('scheduleBody');
+        
+        let completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || {};
+        days.forEach(day => {
+            if (!completedTasks[day]) completedTasks[day] = {};
+        });
+
+        function saveProgress() {
+            localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+        }
+
+        function generateSchedule() {
+            for (let time in schedule) {
+                const row = document.createElement('tr');
+                const timeCell = document.createElement('td');
+                timeCell.className = 'time-cell';
+                timeCell.textContent = time;
+                row.appendChild(timeCell);
+
+                days.forEach(day => {
+                    const cell = document.createElement('td');
+                    const activity = document.createElement('span');
+                    activity.className = `activity ${schedule[time].class}`;
+                    activity.textContent = schedule[time].activity;
+                    
+                    const taskKey = `${time}-${day}`;
+                    if (completedTasks[day][taskKey]) {
+                        activity.classList.add('completed');
+                    }
+                    
+                    activity.onclick = function() {
+                        this.classList.toggle('completed');
+                        completedTasks[day][taskKey] = this.classList.contains('completed');
+                        saveProgress();
+                        updateProgress();
+                    };
+                    cell.appendChild(activity);
+                    row.appendChild(cell);
+                });
+
+                scheduleBody.appendChild(row);
+            }
+        }
+
+        function updateProgress() {
+            let totalTasks = Object.keys(schedule).length * days.length;
+            let completedCount = 0;
+
+            days.forEach(day => {
+                for (let task in completedTasks[day]) {
+                    if (completedTasks[day][task]) {
+                        completedCount++;
+                    }
+                }
+            });
+
+            const percentage = Math.round((completedCount / totalTasks) * 100);
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressFill').textContent = percentage + '%';
+            document.getElementById('completion').textContent = percentage + '%';
+        }
+
+        generateSchedule();
+        updateProgress();
+    </script>
+</body>
+</html>
