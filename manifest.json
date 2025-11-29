@@ -2,20 +2,24 @@
   "name": "Weekly Discipline Schedule",
   "short_name": "Schedule",
   "description": "Build better habits with your personal weekly schedule",
-  "start_url": "./",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#667eea",
   "icons": [
     {
-      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjNjY3ZWVhIj4KICA8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI1MCIgZmlsbD0iIzQ1NkRGRiIvPgogIDxwYXRoIGQ9Ik0gMTAwIDE1MCBsIDI1MCAwIGwgMCAyNTAgWiIgZmlsbD0iI2ZmZmZmZiIvPgo8L3N2Zz4=",
-      "sizes": "512x512",
-      "type": "image/svg+xml"
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     },
     {
-      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjNjY3ZWVhIj4KICA8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI1MCIgZmlsbD0iIzQ1NkRGRiIvPgogIDxwYXRoIGQ9Ik0gMTAwIDE1MCBsIDI1MCAwIGwgMCAyNTAgWiIgZmlsbD0iI2ZmZmZmZiIvPgo8L3N2Zz4=",
-      "sizes": "192x192",
-      "type": "image/svg+xml"
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ]
 }

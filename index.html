@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#667eea">
     <meta name="description" content="Weekly Discipline Schedule - Build Better Habits">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjNjY3ZWVhIj4KICA8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI1MCIgZmlsbD0iIzQ1NkRGRiIvPgogIDxwYXRoIGQ9Ik0gMTAwIDE1MCBsIDI1MCAwIGwgMCAyNTAgWiIgZmlsbD0iI2ZmZmZmZiIvPgo8L3N2Zz4=">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Schedule">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="/icon-192.svg">
+    <link rel="apple-touch-icon" href="/icon-512.svg">
     <title>Weekly Discipline Schedule</title>
     <style>
         * {
@@ -398,7 +403,7 @@
         // Service Worker Registration for offline support
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
+                navigator.serviceWorker.register('/sw.js', { scope: '/' })
                     .then(() => console.log('Service Worker registered'))
                     .catch(err => console.log('Service Worker registration failed:', err));
             });
@@ -409,19 +414,43 @@
         const installPrompt = document.getElementById('installPrompt');
         const installBtn = document.getElementById('installBtn');
         const closeInstall = document.getElementById('closeInstall');
+        const installPromptText = installPrompt.querySelector('span');
 
+        // Detect iOS
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.navigator.standalone || (window.matchMedia('(display-mode: standalone)').matches);
+
+        // Don't show prompt if already installed
+        if (isStandalone) {
+            installPrompt.style.display = 'none';
+        }
+
+        // Handle Android/Chrome install prompt
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            installPrompt.classList.add('show');
+            if (!isStandalone) {
+                installPromptText.textContent = '📱 Install this app for offline access!';
+                installPrompt.classList.add('show');
+            }
         });
+
+        // Handle iOS - show instructions
+        if (isIOS && !isStandalone) {
+            installPromptText.textContent = '📱 Tap Share → Add to Home Screen';
+            installPrompt.classList.add('show');
+        }
 
         installBtn.addEventListener('click', async () => {
             if (deferredPrompt) {
+                // Android/Chrome
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
                 console.log(`User response: ${outcome}`);
                 deferredPrompt = null;
+                installPrompt.classList.remove('show');
+            } else if (isIOS) {
+                // iOS - just close, user needs to use share menu
                 installPrompt.classList.remove('show');
             }
         });
