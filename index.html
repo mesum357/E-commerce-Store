@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#667eea">
     <meta name="description" content="Weekly Discipline Schedule - Build Better Habits">
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIldlZWtseSBEaXNjaXBsaW5lIFNjaGVkdWxlIiwKICAic2hvcnRfbmFtZSI6ICJTY2hlZHVsZSIsCiAgImRlc2NyaXB0aW9uIjogIkJ1aWxkIGJldHRlciBoYWJpdHMgd2l0aCB5b3VyIHBlcnNvbmFsIHdlZWtseSBzY2hlZHVsZSIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZmZmZiIsCiAgInRoZW1lX2NvbG9yIjogIiM2NjdlZWEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSTFNVEVPSUDOBGVSYW5kYSoGlTSkxJaThDSUdacGJHdzlJaU0yTmpkbFpXRWlQZ28JUER4amFYSmpiR1VnWTNnOUlqSTFOaUlnWTNrOUlqSTFOaUlnY2owaU1qVXdJaUJtYVd4c1BTSJRKQ2MwTlRaR1JrWWlMejRLSUR4d1lYUm9JR1E5SWswZ01UQXdJREUxTUNCc0lESTFNQ0F3SUd3Z01DQXlOVEFnV2lJZ1ptbHNiRDBpSTJabVptWm1aaUl2UGdvOEwzTjJaejQ9IiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSTFNVEVPSUNONGRSYW5kYSoGlTSkxJaThDSUdacGJHdzlJaU0yTmpkbFpXRWlQZ29JUER4amFYSmpiR1VnWTNnOUlqSTFOaUlnWTNrOUlqSTFOaUlnY2owaU1qVXdJaUJtYVd4c1BTSJRKQ2MwTlRaR1JrWWlMejRLSUR4d1lYUm9JR1E5SWswZ01UQXdJREUxTUNCc0lESTFNQ0F3SUd3Z01DQXlOVEFnV2lJZ1ptbHNiRDBpSTJabVptWm1aaUl2UGdvOEwzTjJaejQ9IiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjNjY3ZWVhIj4KICA8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI1MCIgZmlsbD0iIzQ1NkRGRiIvPgogIDxwYXRoIGQ9Ik0gMTAwIDE1MCBsIDI1MCAwIGwgMCAyNTAgWiIgZmlsbD0iI2ZmZmZmZiIvPgo8L3N2Zz4=">
     <title>Weekly Discipline Schedule</title>
     <style>
@@ -398,30 +398,7 @@
         // Service Worker Registration for offline support
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                const swCode = `
-                    const CACHE_NAME = 'discipline-schedule-v1';
-                    
-                    self.addEventListener('install', (event) => {
-                        event.waitUntil(
-                            caches.open(CACHE_NAME).then((cache) => {
-                                return cache.addAll(['/']);
-                            })
-                        );
-                    });
-
-                    self.addEventListener('fetch', (event) => {
-                        event.respondWith(
-                            caches.match(event.request).then((response) => {
-                                return response || fetch(event.request);
-                            })
-                        );
-                    });
-                `;
-                
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                
-                navigator.serviceWorker.register(swUrl)
+                navigator.serviceWorker.register('./sw.js')
                     .then(() => console.log('Service Worker registered'))
                     .catch(err => console.log('Service Worker registration failed:', err));
             });
